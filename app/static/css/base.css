@@ -1,0 +1,85 @@
+@font-face
+{
+	font-family: roboto;
+	src: url('Roboto-Regular.ttf');
+}
+body
+{
+	
+	font-family: roboto;
+	background-color: #3D5A80;
+}
+a
+{
+	text-decoration: none;
+	color: #312F2F;
+}
+a:hover
+{
+	color: #BFD1E5;
+}
+a.nav:link, a.nav:visited, a.nav:hover
+{
+	color: #FFFCF9;
+	display: inline-block;
+	border-radius: 10px;
+	padding: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+a.nav:hover
+{
+	background-color: #BFD1E5;
+}
+div.header
+{
+	float: left;
+	color: #FFFCF9;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 10px;
+	font-size: 2em;
+}
+div.navbar
+{
+	float: left;
+	color: #FFFCF9;
+	font-size: 1.3em;
+	margin-top: 25px;
+	margin-bottom: 20px;
+	margin-left: 30px;
+}
+div.box
+{
+	display: block;
+	margin: auto;
+	font-family: roboto;
+	border-radius: 25px;
+	background: #FFFCF9;
+	border: 1px solid #312F2F;
+	color: #312F2F;
+	padding: 20px;
+	width: 300px;
+}
+br.navgap
+{
+	display: block;
+	content: "";
+	margin-top: 30px;
+	line-height: 300%;
+	clear: both;
+}
+button
+{
+	background-color: #312F2F;
+}
+h1
+{
+	font-size: 1.5em;
+	text-align: center;
+	margin-top: 0px;
+}
+p
+{
+
+}

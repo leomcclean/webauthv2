@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<title>{{ title }}</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}"/>
+	</head>
+	<body>
+		<div class="header">
+			webAuthV2:     
+		</div>
+		<div class="navbar">
+			{% if current_user.is_anonymous %}
+			<a href="{{ url_for('login') }}" class="nav">Login</a>
+			{% else %}
+			<a href="{{ url_for('logout') }}" class="nav">Logout</a>
+			<a href="{{ url_for('changep') }}" class="nav">Change Password</a>
+			{% endif %}
+		</div>
+		<br class="navgap">
+		<div class="box">
+			{% block content %}{% endblock %}
+		</div>
+	</body>
+</html>

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Change Password</h1>
+	{% with messages = get_flashed_messages() %}
+	{% if messages %}
+		{% for message in messages %}
+			{% if message == "" %}
+			<ul>
+				<li>{{ message }}</li>
+			</ul>
+			{% else %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	{% endwith %}
+	<form action="" method="post">
+		{{ form.hidden_tag() }}
+		<p>
+			{{ form.oldpassword.label }}<br>
+			{{ form.oldpassword(size=32) }}
+			{% for error in form.oldpassword.errors %}
+			<span style="color: red;">[{{ error }}]</span>
+			{% endfor %}
+		</p>
+		<p>
+			{{ form.newpassword.label }}<br>
+			{{ form.newpassword(size=32) }}
+			{% for error in form.newpassword.errors %}
+			<span style="color: red;">[{{ error }}]</span>
+			{% endfor %}
+		</p>
+		<p>
+			{{ form.newpassword2.label }}<br>
+			{{ form.newpassword2(size=32) }}
+			{% for error in form.newpassword2.errors %}
+			<span style="color: red;">[{{ error }}]</span>
+			{% endfor %}
+		</p>
+		<p>{{ form.submit() }}</p>
+	</form>
+{% endblock %}

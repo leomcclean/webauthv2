@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Sign In</h1>
+	{% with messages = get_flashed_messages() %}
+	{% if messages %}
+		{% for message in messages %}
+			{% if message == "Invalid username" %}
+			<ul>
+				<li>{{ message }}</li>
+			</ul>
+			{% elif message == "Out of attempts. New OTP required." %}
+			<ul>
+				<li>{{ message }}</li>
+			</ul>
+			{% elif message == "Incorrect one time password" %}
+			<ul>
+				<li>{{ message }}</li>
+			</ul>
+			{% else %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	{% endwith %}
+	<form action="" method="post" novalidate>
+		{{ form.hidden_tag() }}
+		<p>
+			{{ form.username.label }}
+			<br>
+			{{ form.username(size=32) }}
+			{% for error in form.username.errors %}
+			<span style="color: red;">[{{ error }}]</span>
+			{% endfor %}
+		</p>
+		<p>{{ form.submit() }}</p>
+		<p>
+			<a href="{{ url_for('register') }}">Register</a>
+		</p>
+	</form>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Hi, {{ current_user.username }}!</h1>
+    {% with messages = get_flashed_messages() %}
+	{% if messages %}
+		{% for message in messages %}
+			{% if message == "Password changed successfully" %}
+			<ul>
+				<li>{{ message }}</li>
+			</ul>
+			{% elif message == "You have now registered" %}
+			<ul>
+				<li>{{ message }}</li>
+			</ul>
+			{% else %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	{% endwith %}
+{% endblock %}

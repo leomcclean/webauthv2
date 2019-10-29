@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Partial Password Sign In</h1>
+	{% with flashes = get_flashed_messages() %}
+		{% if flashes %}
+			{% if flashes|length > 1 %}
+				{% for flash in flashes[:-1] %}
+				<ul>
+					<li>{{ flash }}</li>
+				</ul>
+				{% endfor %}
+			{% else %}
+				{% for flash in flashes %}
+				<ul>
+					<li>{{ flash }}</li>
+				</ul>
+				{% endfor %}
+			{% endif %}
+		{% endif %}
+	{% endwith %}
+	<form action="" method="post" novalidate>
+		{{ form.hidden_tag() }}
+		<p>
+			{{ form.password.label }}<br>
+			{{ form.password(size=4) }}
+			{% for error in form.password.errors %}
+			<span style="color: red;">[{{ error }}]</span>
+			{% endfor %}
+		</p>
+		<p>{{ form.submit() }}</p>
+	</form>
+{% endblock %}

@@ -1,0 +1,8 @@
+#!/bin/bash
+cd ~/Documents/CSU33BC1/flasktest/
+rm app.db
+rm -r migrations
+workon authWebsite2
+flask db init
+flask db migrate -m 'a fresh start'
+flask db upgrade
