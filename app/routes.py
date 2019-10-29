@@ -51,7 +51,6 @@ def login():
 			return redirect(url_for('login'))
 		user_hash = user.user_hash
 		otp = generateOTP(user_hash)
-		print(otp, file=sys.stdout)
 		otp_hash = generate_password_hash(otp)
 		return redirect(url_for('otp', user_hash=user_hash, otp_hash=otp_hash))
 	return render_template('login.html', title='Sign In', form=form)
