@@ -62,7 +62,7 @@ div.box
 	border: 1px solid #312F2F;
 	color: #312F2F;
 	padding: 15px;
-	width: 240px;
+	width: 350px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -86,7 +86,7 @@ input.submit:hover
 }
 input.field
 {
-	width: 240px;
+	width: 350px;
 }
 h1
 {
