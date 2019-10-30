@@ -27,12 +27,12 @@
 		<p>
 			{{ form.username.label }}
 			<br>
-			{{ form.username(size=32) }}
+			{{ form.username(size=32, class_="field") }}
 			{% for error in form.username.errors %}
 			<span style="color: red;">[{{ error }}]</span>
 			{% endfor %}
 		</p>
-		<p>{{ form.submit() }}</p>
+		<p>{{ form.submit(class_="submit") }}</p>
 		<p>
 			<a href="{{ url_for('register') }}">Register</a>
 		</p>

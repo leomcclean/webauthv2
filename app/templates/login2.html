@@ -23,11 +23,11 @@
 		{{ form.hidden_tag() }}
 		<p>
 			{{ form.password.label }}<br>
-			{{ form.password(size=4) }}
+			{{ form.password(size=4, class_="field") }}
 			{% for error in form.password.errors %}
 			<span style="color: red;">[{{ error }}]</span>
 			{% endfor %}
 		</p>
-		<p>{{ form.submit() }}</p>
+		<p class="submit">{{ form.submit(class_="submit") }}</p>
 	</form>
 {% endblock %}

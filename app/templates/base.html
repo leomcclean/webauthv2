@@ -5,17 +5,19 @@
 	</head>
 	<body>
 		<div class="header">
-			webAuthV2:     
+			webAuthV2:   
+			<div class="navbar">
+				{% if current_user.is_anonymous %}
+				<a href="{{ url_for('login') }}" class="nav">Login</a>
+				{% else %}
+				<a href="{{ url_for('logout') }}" class="nav">Logout</a>
+				<a href="{{ url_for('changep') }}" class="nav">Change Password</a>
+				{% endif %}
+			</div>  
 		</div>
-		<div class="navbar">
-			{% if current_user.is_anonymous %}
-			<a href="{{ url_for('login') }}" class="nav">Login</a>
-			{% else %}
-			<a href="{{ url_for('logout') }}" class="nav">Logout</a>
-			<a href="{{ url_for('changep') }}" class="nav">Change Password</a>
-			{% endif %}
-		</div>
-		<br class="navgap">
+		<br class='navgap'>
+		<br class='navgap'>
+		<br class='navgap'>
 		<div class="box">
 			{% block content %}{% endblock %}
 		</div>

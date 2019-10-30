@@ -6,12 +6,12 @@
 		{{ form.hidden_tag() }}
 		<p>
 			{{ form.code.label }}<br>
-			{{ form.code(size=6) }}
+			{{ form.code(size=6, class_="field") }}
 			{% for error in form.code.errors %}
 			<span style="color: red;">[{{ error }}]</span>
 			{% endfor %}
 		</p>
-		<p>{{ form.submit() }}</p>
-		<p>{{ form.partial() }}</p>
+		<p  class="submit">{{ form.submit(class_="submit") }}</p>
+		<p  class="submit">{{ form.partial(class_="submit") }}</p>
 	</form>
 {% endblock %}

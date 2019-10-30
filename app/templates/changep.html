@@ -18,25 +18,25 @@
 		{{ form.hidden_tag() }}
 		<p>
 			{{ form.oldpassword.label }}<br>
-			{{ form.oldpassword(size=32) }}
+			{{ form.oldpassword(size=32, class_="field") }}
 			{% for error in form.oldpassword.errors %}
 			<span style="color: red;">[{{ error }}]</span>
 			{% endfor %}
 		</p>
 		<p>
 			{{ form.newpassword.label }}<br>
-			{{ form.newpassword(size=32) }}
+			{{ form.newpassword(size=32, class_="field") }}
 			{% for error in form.newpassword.errors %}
 			<span style="color: red;">[{{ error }}]</span>
 			{% endfor %}
 		</p>
 		<p>
 			{{ form.newpassword2.label }}<br>
-			{{ form.newpassword2(size=32) }}
+			{{ form.newpassword2(size=32, class_="field") }}
 			{% for error in form.newpassword2.errors %}
 			<span style="color: red;">[{{ error }}]</span>
 			{% endfor %}
 		</p>
-		<p>{{ form.submit() }}</p>
+		<p  class="submit">{{ form.submit(class_="submit") }}</p>
 	</form>
 {% endblock %}
