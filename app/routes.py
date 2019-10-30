@@ -29,9 +29,10 @@ Subject: New Login Attempt
 Your one time password is """ + otp + '.'
 		
 	context = ssl.create_default_context()
-	with smtplib.SMTP_SSL(os.getenv('MAIL_SERVER'), os.getenv('MAIL_PORT')) as server:
-		server.login(os.getenv('MAIL_EMAIL'), os.getenv('MAIL_PASSWORD'))
-		server.sendmail(os.getenv('MAIL_EMAIL'), user.email, message)
+	server = smtplib.SMTP_SSL(os.getenv('MAIL_SERVER'), os.getenv('MAIL_PORT'))
+	server.login(os.getenv('MAIL_EMAIL'), os.getenv('MAIL_PASSWORD'))
+	server.sendmail(os.getenv('MAIL_EMAIL'), user.email, message)
+	server.quit()
 	
 	return otp
 
