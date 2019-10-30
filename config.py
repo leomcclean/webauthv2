@@ -1,9 +1,12 @@
 #!/usr/bin/python3
 import os
+from dotenv import load_dotenv
 basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(basedir, '.env'))
 
 class Config(object):
-	SECRET_KEY = 'ZTLA6DgGSQV0dsRc6n7Z'
-	SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://webauthv2:Rocket1234@webauthv2db.cxvqbz3pght8.eu-west-1.rds.amazonaws.com/db'
+	SECRET_KEY = os.getenv('SECRET_KEY')
+	SQLALCHEMY_DATABASE_URI = os.getenv('DB_URL')
+	#SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 	WTF_CSRF_ENABLED = True

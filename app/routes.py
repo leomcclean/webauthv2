@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+import os
+from dotenv import load_dotenv
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from app.forms import LoginForm, OTPForm, RegistrationForm, PasswordForm, ChangeForm
@@ -27,9 +29,9 @@ Subject: New Login Attempt
 Your one time password is """ + otp + '.'
 		
 	context = ssl.create_default_context()
-	with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as server:
-		server.login('authwebv2@gmail.com', 'Rocket1234')
-		server.sendmail('authwebv2@gmail.com', user.email, message)
+	with smtplib.SMTP_SSL(os.getenv('MAIL_SERVER'), os.getenv('MAIL_PORT')) as server:
+		server.login(os.getenv('MAIL_EMAIL'), os.getenv('MAIL_PASSWORD'))
+		server.sendmail(os.getenv('MAIL_EMAIL'), user.email, message)
 	
 	return otp
 
