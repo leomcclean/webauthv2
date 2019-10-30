@@ -32,25 +32,25 @@ a.nav:hover
 {
 	background-color: #BFD1E5;
 }
+div.header
+{
+	background-color: #312F2F;
+	width: calc(100% - 20px);
+	color: #FFFCF9;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	padding-left: 20px;
+	font-size: 2em;
+}
 div.navbar
 {
 	background-color: #312F2F;
 	display: block;
 	float: right;
 	color: #FFFCF9;
-	font-size: 24px;
-	padding-left: 30px;
-	padding-right: 0px;
-}
-div.header
-{
-	background-color: #312F2F;
-	width: max(calc(100% - 10px), 300px);
-	color: #FFFCF9;
-	padding-top: 20px;
-	padding-bottom: 20px;
+	font-size: .8em;
 	padding-left: 10px;
-	font-size: 2em;
+	padding-right: 0%;
 }
 div.box
 {
@@ -66,7 +66,6 @@ div.box
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 }
 input
