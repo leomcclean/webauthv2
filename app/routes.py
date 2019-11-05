@@ -44,7 +44,7 @@ def index():
 	ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
 	match = geolite2.lookup(ip)
 	if match is not None:
-		country = match.country
+		country = match.country_name
 	else:
 		country = False
 	user = User.query.filter_by(username=current_user.username).first()
