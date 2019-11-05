@@ -2,6 +2,9 @@
 
 {% block content %}
     <h1>Hi, {{ current_user.username }}!</h1>
+	{% if country != False %}
+		<p>You are {{ ip }} from {{ country }}!</p>
+	{% endif %}
     {% with messages = get_flashed_messages() %}
 	{% if messages %}
 		{% for message in messages %}
@@ -18,4 +21,12 @@
 		{% endfor %}
 	{% endif %}
 	{% endwith %}
+	<p>Try a new style of css while you're here.</p>
+	<form name="cssForm" action="" method="post" onsubmit="">
+	<p>
+		<input type="radio" name="css" id="one" value=1 checked> Cool Original </input><br>
+		<input type="radio" name="css" id="two" value=2> Gaudy Purple </input><br>
+		<input type="radio" name="css" id="three" value=3> Hotrod Red </input><br>
+	</p>
+	<p><input type="submit" value="Go Crazy"></p>
 {% endblock %}

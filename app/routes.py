@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 import os
+from geoip import geolite2
 from dotenv import load_dotenv
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, OTPForm, RegistrationForm, PasswordForm, ChangeForm
+from app.forms import LoginForm, OTPForm, RegistrationForm, PasswordForm, ChangeForm, cssForm
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.models import User
@@ -36,17 +37,29 @@ Your one time password is """ + otp + '.'
 	
 	return otp
 
-@app.route('/')
-@app.route('/index')
-
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-	return render_template('index.html', title='webAuthV2')
+	ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
+	match = geolite2.lookup(ip)
+	if match is not None:
+		country = match.country
+	else:
+		country = False
+	user = User.query.filter_by(username=current_user.username).first()
+	css = user.css
+	if request.method == 'POST':
+		css = int(request.form['css'])
+		user.updateCSS(css)
+		db.session.commit()
+	return render_template('index.html', title='Home', ip=ip, country=country, css=css)
 	
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if current_user.is_authenticated:
 		return redirect(url_for('index'))
+	css = 1
 	form = LoginForm()
 	if form.validate_on_submit():
 		user = User.query.filter_by(username=form.username.data).first()
@@ -57,12 +70,14 @@ def login():
 		otp = generateOTP(user_hash)
 		otp_hash = generate_password_hash(otp)
 		return redirect(url_for('otp', user_hash=user_hash, otp_hash=otp_hash))
-	return render_template('login.html', title='Sign In', form=form)
+	return render_template('login.html', title='Sign In', form=form, css=css)
 
 @app.route('/otp', methods=['GET', 'POST'])
 def otp():
 	user_hash = str(request.args.get('user_hash'))
 	otp_hash = str(request.args.get('otp_hash'))
+	user = User.query.filter_by(user_hash=user_hash).first()
+	css = user.css
 	form = OTPForm()
 	if form.validate_on_submit():
 		if not check_password_hash(otp_hash, form.code.data):
@@ -70,17 +85,17 @@ def otp():
 			return redirect(url_for('login'))
 		count = 0
 		if form.partial.data:
-			user = User.query.filter_by(user_hash=user_hash).first()
 			short_pass = user.returnShortPass()
 			return redirect(url_for('login2', user_hash=user_hash, short_pass=short_pass, count=count))
 		elif form.submit.data:
 			return redirect(url_for('login3', user_hash=user_hash, count=count))
-	return render_template('otp.html', title='One Time Password', form=form)
+	return render_template('otp.html', title='One Time Password', form=form, css=css)
 
 @app.route('/login2', methods=['GET', 'POST'])
 def login2():
 	user_hash = str(request.args.get('user_hash'))
 	user = User.query.filter_by(user_hash=user_hash).first()
+	css = user.css
 	short_pass = str(request.args.get('short_pass'))
 	count = int(request.args.get('count'))
 	form = PasswordForm()
@@ -97,12 +112,13 @@ def login2():
 				return redirect(url_for('login2', user_hash=user_hash, short_pass=short_pass, count=count))
 		login_user(user)
 		return redirect(url_for('index'))
-	return render_template('login2.html', title='Sign In', form=form)
+	return render_template('login2.html', title='Sign In', form=form, css=css)
 	
 @app.route('/login3', methods=['GET', 'POST'])
 def login3():
 	user_hash = str(request.args.get('user_hash'))
 	user = User.query.filter_by(user_hash=user_hash).first()
+	css = user.css
 	count = int(request.args.get('count'))
 	form = PasswordForm()
 	flash('Enter password.')
@@ -118,7 +134,7 @@ def login3():
 				return redirect(url_for('login3', user_hash=user_hash, count=count))
 		login_user(user)
 		return redirect(url_for('index'))
-	return render_template('login3.html', title='Sign In', form=form)
+	return render_template('login3.html', title='Sign In', form=form, css=css)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -127,19 +143,21 @@ def register():
 	form = RegistrationForm()
 	if form.validate_on_submit():
 		user = User(username=form.username.data, email=form.email.data)
+		user.updateCSS(1)
 		user.hashName()
 		user.setPassword(form.password.data)
 		db.session.add(user)
 		db.session.commit()
 		flash('You have now registered')
 		return redirect(url_for('login'))
-	return render_template('register.html', title='Register', form=form)
+	return render_template('register.html', title='Register', form=form, css=css)
 	
 @app.route('/changep', methods=['GET', 'POST'])
 def changep():
 	form = ChangeForm()
 	username = current_user.username
 	user = User.query.filter_by(username=username).first()
+	css = user.css
 	if form.validate_on_submit():
 		if not user.checkPassword(form.oldpassword.data):
 			flash('Incorrect password')
@@ -148,7 +166,7 @@ def changep():
 		db.session.commit()
 		flash('Password changed successfully')
 		return redirect(url_for('index'))
-	return render_template('changep.html', title='Change Password', form=form)
+	return render_template('changep.html', title='Change Password', form=form, css=css)
 	
 @app.route('/logout')
 def logout():

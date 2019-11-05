@@ -45,6 +45,11 @@ class User(UserMixin, db.Model):
 	short_pass3 = db.Column(db.String(64))
 	short_hash3 = db.Column(db.String(128))
 	
+	css = db.Column(db.Integer)
+	
+	def updateCSS(self, css):
+		self.css = css
+	
 	def hashName(self):
 		self.user_hash = generate_password_hash(self.username)
 	

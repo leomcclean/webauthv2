@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, RadioField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
 import sys
@@ -8,6 +8,9 @@ import sys
 def lengthCheck(form, field):
 	if len(field.data) > 32 or len(field.data) < 10:
 		raise ValidationError('Password must be a minimun of 10 and maximum of 20 characters.')
+		
+class cssForm(FlaskForm):
+	css = RadioField('CSS Style:', choices=[('one','Cool Original'),('two','Gaudy Purple'),('three','Hotrod Red')])
 
 class LoginForm(FlaskForm):
 	username = StringField('Username', validators=[DataRequired()])

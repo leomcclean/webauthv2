@@ -1,7 +1,15 @@
 <html>
 	<head>
 		<title>{{ title }}</title>
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}"/>
+		{% if css == None %}
+			<link rel="stylesheet" href="{{ url_for('static', filename='css/one.css') }}"/>
+		{% elif css == 1 %}
+			<link rel="stylesheet" href="{{ url_for('static', filename='css/one.css') }}"/>
+		{% elif css == 2 %}
+			<link rel="stylesheet" href="{{ url_for('static', filename='css/two.css') }}"/>
+		{% elif css == 3 %}
+			<link rel="stylesheet" href="{{ url_for('static', filename='css/three.css') }}"/>
+		{% endif %}
 	</head>
 	<body>
 		<div class="header">
