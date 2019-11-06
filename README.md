@@ -16,8 +16,7 @@ The login process is handled in 3 steps: username verification, OTA code verific
 For simplicity, given a compromised system will most certainly have at minimum a keylogger and foreign access to the system, the required partial password digits are given in plain text both in the website url at the login stage, and on the page. Note that if there is no keylogger, as the password entry is secure visually and through transit (https only on the production server), there is no risk of vulnerability due to this implmentation.
 
 A .env file must be created, with relevant information filled in to allow a production server, SQL support, and OTA by email support.
-<pre><code>
-SECRET_KEY=
+<pre><code>SECRET_KEY=
 MAIL_SERVER=
 MAIL_PORT=
 MAIL_EMAIL=
@@ -27,10 +26,13 @@ ENVIRONMENT= (0 for local SQLite db, 1 for MySQL with DB_URL)
 </code></pre>
 
 /app/templates stores relevant html files, rendered in /app/routes.py.
+
 /app/static hosts static assets such as the CSS and font file.
 
 /app/models.py details the relevant models our SQL database is created from.
+
 /app/forms.py handles the forms created by plugin WTForms, rendered in /app/routes.py.
+
 /app/routes.py details the pages, routes between them, and other additional code such as the OTA email.
 
 This proof-of-concept was built for module CSU33BC1 at Trinity College Dublin, and inspired by similar concepts such as Bank of Ireland's 365online partial-code login.
