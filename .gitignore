@@ -2,6 +2,5 @@
 app.db
 __pycache__/
 dbcreate.py
-fixdb
 migrations/
 
