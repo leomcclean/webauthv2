@@ -142,6 +142,7 @@ def login3():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+	css = 1
 	if current_user.is_authenticated:
 		return redirect(url_for('index'))
 	form = RegistrationForm()
