@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import os
+import os, pycountry
 from geoip import geolite2
 from dotenv import load_dotenv
 from flask import render_template, flash, redirect, url_for, request
@@ -44,7 +44,8 @@ def index():
 	ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
 	match = geolite2.lookup(ip)
 	if match is not None:
-		country = match.country_name
+		country_object = pycountry.countries.lookup(str(match.country))
+		country = country_object.name
 	else:
 		country = False
 	user = User.query.filter_by(username=current_user.username).first()
