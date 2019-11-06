@@ -45,7 +45,7 @@ class User(UserMixin, db.Model):
 	short_pass3 = db.Column(db.String(64))
 	short_hash3 = db.Column(db.String(128))
 	
-	css = db.Column(db.Integer)
+	css = db.Column(db.Integer, default=1)
 	
 	def updateCSS(self, css):
 		self.css = css

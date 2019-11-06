@@ -90,6 +90,9 @@ def otp():
 			return redirect(url_for('login2', user_hash=user_hash, short_pass=short_pass, count=count))
 		elif form.submit.data:
 			return redirect(url_for('login3', user_hash=user_hash, count=count))
+		elif form.forgot.data:
+			login_user(user)
+			return redirect(url_for('changep'))
 	return render_template('otp.html', title='One Time Password', form=form, css=css)
 
 @app.route('/login2', methods=['GET', 'POST'])

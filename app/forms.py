@@ -18,8 +18,9 @@ class LoginForm(FlaskForm):
 	
 class OTPForm(FlaskForm):
 	code = StringField('Code', validators=[DataRequired()])
-	submit = SubmitField('Proceed with Standard Login')
-	partial = SubmitField('Proceed with Risky Login')
+	submit = SubmitField('Standard Password Login')
+	partial = SubmitField('Partial Password Login')
+	forgot = SubmitField('Forgot Password')
 	
 class PasswordForm(FlaskForm):
 	password = PasswordField('Password', validators=[DataRequired()])
