@@ -1,0 +1,95 @@
+@font-face
+{
+	font-family: roboto;
+	src: url('Roboto-Regular.ttf');
+}
+body
+{
+	
+	font-family: roboto;
+	background-color: #FF9F1C;
+	margin: 0px;
+}
+a
+{
+	text-decoration: none;
+	color: #312F2F;
+}
+a:hover
+{
+	color: #F7A072;
+}
+a.nav:link, a.nav:visited, a.nav:hover
+{
+	color: #FFFCF9;
+	display: inline-block;
+	border-radius: 10px;
+	padding: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+a.nav:hover
+{
+	background-color: #F7A072;
+}
+div.header
+{
+	background-color: #312F2F;
+	width: calc(100% - 20px);
+	color: #FFFCF9;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	padding-left: 20px;
+	font-size: 2em;
+}
+div.navbar
+{
+	background-color: #312F2F;
+	display: block;
+	float: right;
+	color: #FFFCF9;
+	font-size: .8em;
+	padding-left: 10px;
+	padding-right: 0%;
+}
+div.box
+{
+	display: block;
+	margin: auto;
+	font-family: roboto;
+	border-radius: 25px;
+	background: #FFFCF9;
+	border: 1px solid #312F2F;
+	color: #312F2F;
+	padding: 15px;
+	width: 350px;
+	position: absolute;
+	top: 50%;
+	left: calc(50vw - calc(350px / 2 + 25px));
+}
+input
+{
+	background-color: #FFFCF9;
+	font-size: 1em;
+}
+input.submit
+{
+	background-color: #FFFCF9;
+	font-size: 1.0em;
+	border: none;
+	padding: 0px;
+}
+input.submit:hover
+{
+	color: #F7A072;
+}
+input.field
+{
+	width: 350px;
+}
+h1
+{
+	font-size: 1.5em;
+	text-align: center;
+	margin-top: 0px;
+}
