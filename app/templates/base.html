@@ -12,11 +12,14 @@
 		{% elif css == 4 %}
 			<link rel="stylesheet" href="{{ url_for('static', filename='css/four.css') }}"/>
 		{% endif %}
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}"/>
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/wild.css') }}"/>
 	</head>
 	<body>
 		<div class="header">
-			webAuthV2:   
+			<div class="title">
+				<a href="{{ url_for('index') }}" class="home">webAuthV2</a>
+			</div>  
 			<div class="navbar">
 				{% if current_user.is_anonymous %}
 				<a href="{{ url_for('login') }}" class="nav">Login</a>
@@ -26,9 +29,6 @@
 				{% endif %}
 			</div>  
 		</div>
-		<br class='navgap'>
-		<br class='navgap'>
-		<br class='navgap'>
 		<div class="box">
 			{% block content %}{% endblock %}
 		</div>

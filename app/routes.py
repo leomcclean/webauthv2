@@ -2,7 +2,7 @@
 import os, pycountry
 from geoip import geolite2
 from dotenv import load_dotenv
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, send_from_directory
 from app import app, db
 from app.forms import LoginForm, OTPForm, RegistrationForm, PasswordForm, ChangeForm, cssForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -38,6 +38,9 @@ Your one time password is """ + otp + '.'
 	return otp
 
 @app.route('/', methods=['GET', 'POST'])
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 @app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
