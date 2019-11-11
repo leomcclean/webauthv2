@@ -4,7 +4,7 @@ from geoip import geolite2
 from dotenv import load_dotenv
 from flask import render_template, flash, redirect, url_for, request, send_from_directory
 from app import app, db
-from app.forms import LoginForm, OTPForm, RegistrationForm, PasswordForm, ChangeForm, cssForm
+from app.forms import LoginForm, OTPForm, RegistrationForm, PasswordForm, ChangeForm
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.models import User

@@ -7,10 +7,7 @@ import sys
 
 def lengthCheck(form, field):
 	if len(field.data) > 32 or len(field.data) < 10:
-		raise ValidationError('Password must be a minimun of 10 and maximum of 20 characters.')
-		
-class cssForm(FlaskForm):
-	css = RadioField('CSS Style:', choices=[('one','Cool Original'),('two','Gaudy Purple'),('three','Hotrod Red')])
+		raise ValidationError('Password must be a minimum of 10 and maximum of 20 characters.')
 
 class LoginForm(FlaskForm):
 	username = StringField('Username', validators=[DataRequired()])
