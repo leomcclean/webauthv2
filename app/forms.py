@@ -11,7 +11,8 @@ def lengthCheck(form, field):
 
 class LoginForm(FlaskForm):
 	username = StringField('Username', validators=[DataRequired()])
-	submit = SubmitField('Next')
+	loginEmail = SubmitField('Log in with Email')
+	loginSMS = SubmitField('Log in with SMS')
 	
 class OTPForm(FlaskForm):
 	code = StringField('Code', validators=[DataRequired()])

@@ -1,8 +1,7 @@
 #!/bin/bash
-cd ~/Documents/CSU33BC1/flasktest/
+cd ~/Desktop/College/GitHub/webauthv2
 rm app.db
 rm -r migrations
-workon authWebsite2
 flask db init
 flask db migrate -m 'a fresh start'
 flask db upgrade
