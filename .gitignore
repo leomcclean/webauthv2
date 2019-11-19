@@ -3,4 +3,5 @@ app.db
 __pycache__/
 dbcreate.py
 migrations/
+*.pyc
 

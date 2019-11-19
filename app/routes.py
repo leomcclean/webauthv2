@@ -12,16 +12,10 @@ import random, sys, smtplib, ssl
 from twilio.twiml.messaging_response import MessagingResponse
 from twilio.rest import Client
 
-
-
-def generateOTP(user_hash, Email):
-   
-	
-
+def handleOTP(user_hash, email):
 	account_sid = os.environ.get('ACCOUNT_SID')
 	auth_token = os.environ.get('AUTH_TOKEN')
 	client = Client(account_sid, auth_token)
-	
 
 	otp = ''
 	for i in range(6):
@@ -34,19 +28,14 @@ def generateOTP(user_hash, Email):
 		elif cType == 3:
 			newRdm = random.randint(97,122)
 		otp += chr(newRdm)
-	
 
-
-	user = User.query.filter_by(user_hash=user_hash).first()
-	if Email == False :
-
-		client.messages.create(from_=os.environ.get('PHONE_NUMBER'),
-                       to=os.environ.get('USER_PHONE_NUMBER'),
-                       body='Your OTP is ' + otp)
-	
-
-	elif Email == True:
-
+	if(email == False):
+		client.messages.create(
+			from_=os.environ.get('PHONE_NUMBER'),
+			to=os.environ.get('USER_PHONE_NUMBER'),
+			body='Your OTP is ' + otp)
+	elif(email == True):
+		user = User.query.filter_by(user_hash=user_hash).first()
 		message = """\
 
 		Subject: New Login Attempt
@@ -58,13 +47,8 @@ def generateOTP(user_hash, Email):
 		server.login(os.getenv('MAIL_EMAIL'), os.getenv('MAIL_PASSWORD'))
 		server.sendmail(os.getenv('MAIL_EMAIL'), user.email, message)
 		server.quit()
-	
 		
 	return otp
-
-	
-
-
 
 @app.route('/favicon.ico')
 def favicon():
@@ -82,10 +66,6 @@ def index():
 		country = False
 	user = User.query.filter_by(username=current_user.username).first()
 	css = user.css
-	if form.loginEmail.data:
-		return redirect(url_for('loginEmail', user_hash=user_hash, short_pass=short_pass, count=count))
-	elif form.loginSMS.data:
-		return redirect(url_for('loginSMS', user_hash=user_hash, short_pass=short_pass, count=count))
 	if request.method == 'POST':
 		css = int(request.form['css'])
 		user.updateCSS(css)
@@ -105,55 +85,11 @@ def login():
 			flash('Invalid username')
 			return redirect(url_for('login'))
 		if form.loginEmail.data:
-			Email = True
-			user_hash = user.user_hash
-			otp = generateOTP(user_hash, Email)
-			otp_hash = generate_password_hash(otp)
-			return redirect(url_for('otp', user_hash=user_hash, otp_hash=otp_hash))
-
+			email = True
 		elif form.loginSMS.data:
-			Email = False
-			user_hash = user.user_hash
-			otp = generateOTP(user_hash, Email)
-			otp_hash = generate_password_hash(otp)
-		return redirect(url_for('otp', user_hash=user_hash, otp_hash=otp_hash))
-			
-		
-	return render_template('login.html', title='Sign In', form=form, css=css)
-
-@app.route('/loginSMS', methods=['GET', 'POST'])
-def loginSMS():
-
-	Email = False
-	if current_user.is_authenticated:
-		return redirect(url_for('index'))
-	css = 1
-	form = LoginForm()
-	if form.validate_on_submit():
-		user = User.query.filter_by(username=form.username.data).first()
-		if user is None:
-			flash('Invalid username')
-			return redirect(url_for('loginSMS'))
+			email = False
 		user_hash = user.user_hash
-		otp = generateOTP(user_hash, Email)
-		otp_hash = generate_password_hash(otp)
-		return redirect(url_for('otp', user_hash=user_hash, otp_hash=otp_hash))
-	return render_template('login.html', title='Sign In', form=form, css=css)
-
-@app.route('/loginEmail', methods=['GET', 'POST'])
-def loginEmail():
-	Email = True
-	if current_user.is_authenticated:
-		return redirect(url_for('index'))
-	css = 1
-	form = LoginForm()
-	if form.validate_on_submit():
-		user = User.query.filter_by(username=form.username.data).first()
-		if user is None:
-			flash('Invalid username')
-			return redirect(url_for('loginEmail'))
-		user_hash = user.user_hash
-		otp = generateOTP(user_hash, Email)
+		otp = handleOTP(user_hash, email)
 		otp_hash = generate_password_hash(otp)
 		return redirect(url_for('otp', user_hash=user_hash, otp_hash=otp_hash))
 	return render_template('login.html', title='Sign In', form=form, css=css)
@@ -175,7 +111,6 @@ def otp():
 			return redirect(url_for('login2', user_hash=user_hash, short_pass=short_pass, count=count))
 		elif form.submit.data:
 			return redirect(url_for('login3', user_hash=user_hash, count=count))
-		
 		elif form.forgot.data:
 			login_user(user)
 			return redirect(url_for('changep'))
