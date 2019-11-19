@@ -1,7 +1,6 @@
 #!/bin/bash
-cd ~/Desktop/College/GitHub/webauthv2
 rm app.db
-rm -r migrations
-flask db init
-flask db migrate -m 'a fresh start'
-flask db upgrade
+rm -rf migrations
+python -m flask db init
+python -m flask db migrate -m 'a fresh start'
+python -m flask db upgrade
