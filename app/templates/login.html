@@ -32,6 +32,7 @@
 			<span style="color: red;">[{{ error }}]</span>
 			{% endfor %}
 		</p>
+		<p>{{ form.recaptcha(class_="recaptcha") }}</p>
 		<p>{{ form.loginEmail(class_="submit") }}</p>
 		<p>{{ form.loginSMS(class_="submit") }}</p>
 		<p>

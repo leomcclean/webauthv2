@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, PasswordField, SubmitField, RadioField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
@@ -11,6 +11,7 @@ def lengthCheck(form, field):
 
 class LoginForm(FlaskForm):
 	username = StringField('Username', validators=[DataRequired()])
+	recaptcha = RecaptchaField()
 	loginEmail = SubmitField('Log in with Email')
 	loginSMS = SubmitField('Log in with SMS')
 	
@@ -29,6 +30,7 @@ class RegistrationForm(FlaskForm):
 	email = StringField('Email', validators=[DataRequired(), Email()])
 	password = PasswordField('Password', validators=[DataRequired(), lengthCheck])
 	password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
+	recaptcha = RecaptchaField()
 	submit = SubmitField('Register')
 
 	def validate_username(self, username):

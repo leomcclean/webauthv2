@@ -6,6 +6,10 @@ load_dotenv(os.path.join(basedir, '.env'))
 
 class Config(object):
 	SECRET_KEY = os.getenv('SECRET_KEY')
+	RECAPTCHA_USE_SSL = True
+	RECAPTCHA_PUBLIC_KEY = os.getenv('CAPTCHA_PUBLIC')
+	RECAPTCHA_PRIVATE_KEY = os.getenv('CAPTCHA_PRIVATE')
+	RECAPTCHA_OPTIONS = {'theme':'white'}
 	if(os.getenv('ENVIRONMENT') == 0):
 		SQLALCHEMY_DATABASE_URI = os.getenv('DB_URL')
 	else:
