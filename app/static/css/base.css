@@ -8,63 +8,101 @@ body
 	font-family: roboto;
 	margin: 0px;
 }
+div.body_container
+{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: center;
+	width: 100%;
+	height: 100%;
+}
 a
 {
 	text-decoration: none;
 	color: #312F2F;
 }
-a.nav:link, a.nav:visited, a.nav:hover
+p
 {
+	margin: 10px;
+}
+div.navbar_container
+{
+	display: inline-flex;
+	flex-direction: column;
+	width: 100%;
+}
+div.navbar
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-self: flex-start;
+	align-items: center;
 	color: #FFFCF9;
-	border-radius: 10px;
-	padding: 5px;
-	margin-left: 10px;
+	background-color: #312F2F;
+	width: 100%;
+}
+div.title
+{	
+	display: flex;
+	font-size: 2em;
+	padding: 10px
 }
 a.home
 {
 	color: #FFFCF9;
 	font-size: 1.2em;
 }
-a.nav
+div.nav
+{
+	display: flex;
+	flex-direction: row;
+	overflow: hidden;
+	white-space: nowrap;
+	font-size: 1.4em;
+	padding: 10px;
+}
+a.link:link, a.link:visited, a.link:hover
+{
+	color: #FFFCF9;
+	border-radius: 10px;
+	padding: 5px;
+	margin-left: 10px;
+}
+a.link
 {
 	color: #FFFCF9;
 }
-div.header
+div.box_container
 {
-	font-size: 2em;
-	background-color: #312F2F;
-	width: calc(100% - 20px);
-	display: inline-block;
-	color: #FFFCF9;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 10px;
-	padding-right: 10px;
-}
-div.navbar
-{
-	font-size: .8em;
-	margin: 0px;
-	margin-top: 5px;
-	float: right;
-}
-div.title
-{
-	float: left;
+	display: inline-flex;
+	flex-flow: row wrap;
+	align-self: center;
+	height: 100%;
 }
 div.box
 {
-	display: block;
-	margin: auto;
+	display: flex;
+	flex-flow: column wrap;
+	align-self: center;
 	border-radius: 15px;
 	background: #FFFCF9;
 	border: 3px solid #312F2F;
 	color: #312F2F;
 	padding: 15px;
-	width: 350px;
-	position: absolute;
-	top: 50%;
-	left: calc(50vw - calc(350px / 2 + 25px));
+	margin-top: 100px;
+	width: 304px;
+}
+h1
+{
+	font-size: 1.5em;
+	text-align: center;
+}
+form
+{
+	margin: 0px;
 }
 input
 {
@@ -80,12 +118,5 @@ input.submit
 }
 input.field
 {
-	width: 350px;
-}
-h1
-{
-	font-size: 1.5em;
-	text-align: center; 
-	margin-top: 0px;
-	
+	width: 304px;
 }
