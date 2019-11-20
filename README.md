@@ -72,13 +72,13 @@ flask run
 A .env file must also be created, with relevant information filled in to allow a production server, SQL support, etc:
 <pre><code>SECRET_KEY=		// for secure public hosting, can be anything
 MAIL_SERVER=		// relative to the email address used
-MAIL_PORT=			// server dependent
-MAIL_EMAIL=			// owner email address, configured correctly for insecure login
+MAIL_PORT=		// server dependent
+MAIL_EMAIL=		// owner email address, configured correctly for insecure login
 MAIL_PASSWORD=		// relevant password
-DB_URL=				// used for a web-hosted SQL database
+DB_URL=			// used for a web-hosted SQL database
 ENVIRONMENT=		// 0 for local SQLite db, 1 for MySQL with DB_URL
 ACCOUNT_SID=		// twilio account
-AUTH_TOKEN=			// twilio auth token
+AUTH_TOKEN=		// twilio auth token
 USER_PHONE_NUMBER=	// this would be removed upon proper implementation of user phone number in the database
 PHONE_NUMBER=		// twilio host phone number
 CAPTCHA_PRIVATE=	// provided by Google for ReCaptcha v2 support
