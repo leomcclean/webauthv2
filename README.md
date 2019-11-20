@@ -6,7 +6,7 @@ login service with support for partial password entry
 <a href="https://webauthv2.ml">webauthv2</a> is a proof-of-concept flask website, written mainly in Python.
 The source code is tested and compatible with both Python 2 and 3, given certain relevant dependancies are correct.
 
-The Flask microservice is aided by a collection of libraries (see requirements.txt) which allows usage of SQL options such as SQLite for a local service, or MySQL for a production website, as well as intelligent forms for secure password entry. Other microservice Jinja, bundled with FLask, allows for python written into .html files allowing variable comparison and other useful trickery.
+The Flask microservice is aided by a collection of libraries (see <code>requirements.txt</code>) which allows usage of SQL options such as SQLite for a local service, or MySQL for a production website, as well as intelligent forms for secure password entry. Other microservice Jinja, bundled with Flask, allows for python written into HTML files allowing variable comparison and other useful trickery.
 
 The premise webauthv2 is built upon is that the full entry of a password for a login, even when one-time-authenication is supported, is not inherently secure. Many people re-use passwords and logins for multiple services for ease-of-use, and logging into a OTA-protected service on a compromised computer can still leave a user vulnerable on other services that are not OTA-protected.
 
@@ -18,7 +18,7 @@ The login process is handled in 3 steps: username verification, OTA code verific
 For simplicity, given a compromised system will most certainly have at minimum a keylogger and foreign access to the system, the required partial password digits are given in plain text both in the website url at the login stage, and on the page. Note that if there is no keylogger, as the password entry method is secure there is no risk of vulnerability due to this implementation.
 
 ## HTML files
-/app/templates stores relevant html files, rendered in /app/routes.py.
+<code>/app/templates/</code> stores relevant html files, rendered in <code>/app/routes.py</code>.
 
 Using Jinja, a templating language implemented by Flask, we can use multiple html files on a single page, and support insertion of html files into other files.
 
@@ -26,48 +26,48 @@ Jinja also allows for use of logic statements in html files, and passthrough of 
 
 ## CSS files
 
-/app/static hosts static assets such as the CSS and font files.
+<code>/app/static/</code> hosts static assets such as the CSS and font files.
 
 The CSS is similarly structured to the html; supported with a base file, extended by similar extension files, but also with an animations files "wild.css". The HTML elements declared in our files are rendered as flex boxes to correctly format our page for any size browser window. At this time the mobile interface is a functional one, but customer sizing and other mobile-centric features are not supported.
 
 ## Models and Database
 
-/app/models.py details the relevant models our SQL database is created from.
+<code>/app/models.py</code> details the relevant models our SQL database is created from.
 
-SQLalchemy is the Flask plugin we use to populate our database, whether the local SQLite option of a MySQL hosted database. It provides Object-relational Mapping features that allow python objects (our "User" class) to be mapped into our database.
+SQLalchemy is the Flask plugin we use to populate our database, whether the local SQLite option of a MySQL hosted database. It provides Object-relational Mapping features that allow python objects (our <code>User</code> class) to be mapped into our database.
 
-models.py also employs several functions to compute our partial-password and relevant hashes (supported by FlaskLogin). SQLalchemy sanitises database inputs.
+<code>models.py</code> also employs several functions to compute our partial-password and relevant hashes (supported by FlaskLogin). SQLalchemy sanitises database inputs.
 
 ## User Input via Forms
 
-/app/forms.py handles the forms created by plugin WTForms, rendered in /app/routes.py.
+<code>/app/forms.py</code> handles the forms created by plugin WTForms, rendered in <code>/app/routes.py</code>.
 
 This extension provides form validation, custom error messages, and other useful functionality to ensure minimum password length, password matching login etc.
 
 ## Error Handling
 
-/app/errors.py handles user navigation to non-existent pages.
+<code>/app/errors.py</code> handles user navigation to non-existent pages.
 
 This file could be expanded to support other errors, such as database errors etc, but if the project is correctly setup the only error page the user should experience is the included "Error 404".
 
 ## Routes
 
-/app/routes.py details the pages, routes between them, and other additional code such as the OTA services.
+<code>/app/routes.py</code> details the pages, routes between them, and other additional code such as the OTA services.
 
 This is where the bulk of the code and logic is located. All other files are employed here, where routing handled by Flask itself serves relevant HTML files to the user, handles database queries, insertions, and updates. It also provides the OTA services and GeoIP service for the home page.
 
-Due to current limitations in our knowledge of server-side sessions, we pass a "user_hash" variable through the url in the login process to avoid premature login, and allow the multi-step process to function as a single process. This isn't inherently more insecure than using an encrypted session, as a login attempt must still go through every login step to authenticate a user. However in an improved system we acknowledge that this information would not be contained within the url.
+Due to current limitations in our knowledge of server-side sessions, we pass a <code>user_hash</code> variable through the url in the login process to avoid premature login, and allow the multi-step process to function as a single process. This isn't inherently more insecure than using an encrypted session, as a login attempt must still go through every login step to authenticate a user. However in an improved system we acknowledge that this information would not be contained within the url.
 
 ## Local Installation
 
-The following commands inside the working directory will launch the project with all installed dependencies. it is recommended to set up a virtual environment before using "pip install".
+The following commands inside the working directory will launch the project with all installed dependencies. it is recommended to set up a virtual environment before using <code>pip install</code>.
 
 <pre><code>pip install -r requirements.txt
 bash fixdb
 flask run
 </code></pre>
 
-<pre><code>fixdb</code></pre> is a short bash script to generate an SQLite database and do an initial migration, it can be discarded if you wish to run these commands yourself.
+<code>fixdb</code> is a short bash script to generate an SQLite database and do an initial migration, it can be discarded if you wish to run these commands yourself.
 
 A .env file must also be created, with relevant information filled in to allow a production server, SQL support, etc:
 <pre><code>SECRET_KEY=		// for secure public hosting, can be anything
@@ -87,7 +87,7 @@ CAPTCHA_PUBLIC=		// provided by Google for ReCaptcha v2 support
 
 ## Final Notes
 
-Due to maintaining this project as 'free to run' the OTA via text functionality is implemented using Twilio's free offer. The database would need to be expanded to include a user phone number, and relevant methods in routes.py would need to be modified to support sending a text to a number other than the listed "PHONE_NUMBER" environment variable.
+Due to maintaining this project as 'free to run' the OTA via text functionality is implemented using Twilio's free offer. The database would need to be expanded to include a user phone number, and relevant methods in routes.py would need to be modified to support sending a text to a number other than the listed <code>PHONE_NUMBER</code> environment variable.
 
 This proof-of-concept was built for module CSU33BC1 at Trinity College Dublin, and inspired by similar concepts such as Bank of Ireland's 365online partial-code login.
 
