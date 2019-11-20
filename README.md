@@ -28,7 +28,7 @@ Jinja also allows for use of logic statements in html files, and passthrough of 
 
 <code>/app/static/</code> hosts static assets such as the CSS and font files.
 
-The CSS is similarly structured to the html; supported with a base file, extended by similar extension files, but also with an animations files "wild.css". The HTML elements declared in our files are rendered as flex boxes to correctly format our page for any size browser window. At this time the mobile interface is a functional one, but customer sizing and other mobile-centric features are not supported.
+The CSS is similarly structured to the html; supported with a base file, extended by similar extension files, but also with an animations files <code>wild.css</code>. The HTML elements declared in our files are rendered as flex boxes to correctly format our page for any size browser window. At this time the mobile interface is a functional one, but customer sizing and other mobile-centric features are not supported.
 
 ## Models and Database
 
