@@ -3,7 +3,9 @@ login service with support for partial password entry
 
 ## About the Project
 
-<a href="https://webauthv2.ml">webauthv2</a> is a proof-of-concept flask website, written mainly in Python.
+Note: webauthv2 is no longer publicly hosted, please install locally to use.
+
+webauthv2 is a proof-of-concept flask website, written mainly in Python.
 The source code is tested and compatible with both Python 2 and 3, given certain relevant dependancies are correct.
 
 The Flask microservice is aided by a collection of libraries (see <code>requirements.txt</code>) which allows usage of SQL options such as SQLite for a local service, or MySQL for a production website, as well as intelligent forms for secure password entry. Other microservice Jinja, bundled with Flask, allows for python written into HTML files allowing variable comparison and other useful trickery.
